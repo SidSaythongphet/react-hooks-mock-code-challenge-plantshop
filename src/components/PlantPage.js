@@ -17,13 +17,22 @@ function PlantPage() {
     setPlants([...plants, newPlant])
   }
 
+  const handleDeletePlant = (deletedPlant) => {
+    setPlants(plants.filter(plant => plant.id !== deletedPlant.id))
+  }
+
+  const handleUpdate = (updatedPlant) => {
+    const updatePlants = plants.map(plant => plant.id === updatedPlant.id ? updatedPlant : plant)
+    setPlants(updatePlants)
+  }
+
   const filterPlants = plants.filter(plant => plant.name.toLowerCase().includes(search.toLowerCase()))
 
   return (
     <main>
       <NewPlantForm onSubmitNewPlant={ handleNewPlant }/>
       <Search setSearch={ setSearch } />
-      <PlantList plants={ filterPlants }/>
+      <PlantList plants={ filterPlants } onDeletePlant={ handleDeletePlant } onUpdatePlant={ handleUpdate }/>
     </main>
   );
 }

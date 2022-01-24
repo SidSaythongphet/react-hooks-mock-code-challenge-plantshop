@@ -18,7 +18,10 @@ function NewPlantForm({ onSubmitNewPlant }) {
       body: JSON.stringify(newPlantData)
     })
       .then(resp => resp.json())
-      .then(newPlant => onSubmitNewPlant(newPlant))
+      .then(newPlant => {
+        onSubmitNewPlant(newPlant)
+        e.target.reset()
+      })
   }
 
   const handleChange = (e) => {
